@@ -24,7 +24,6 @@ public class RPSActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_rps);
 
-        rulesTextView = findViewById(R.id.rulesTextViewID);
         computerChoiceTextView = findViewById(R.id.computerChoiceTextView);
         resultTextView = findViewById(R.id.resultTextViewID);
         rockButton = findViewById(R.id.rockButtonID);
@@ -35,10 +34,6 @@ public class RPSActivity extends AppCompatActivity {
         game = new Game();
         computer = new Computer();
 
-        rules = "Choose one button (Rock, Paper or Scissors) and click on it." +
-                "The Computer will make a random guess of Rock, Paper or Scissors." +
-                "The results will then be compared, and the winner displayed below.";
-        rulesTextView.setText(rules);
 
     }
 
