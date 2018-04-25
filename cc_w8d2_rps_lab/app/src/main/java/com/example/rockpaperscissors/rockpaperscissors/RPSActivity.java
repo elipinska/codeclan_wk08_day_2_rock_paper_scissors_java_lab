@@ -1,5 +1,6 @@
 package com.example.rockpaperscissors.rockpaperscissors;
 
+import android.content.Intent;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
@@ -8,11 +9,9 @@ import android.widget.TextView;
 
 public class RPSActivity extends AppCompatActivity {
 
-    private String rules;
-    private TextView rulesTextView;
+
     private TextView computerChoiceTextView;
-    private TextView resultTextView;
-    private TextView scoreView;
+    private TextView scoreTextView;
     private Button rockButton;
     private Button paperButton;
     private Button scissorsButton;
@@ -25,11 +24,10 @@ public class RPSActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rps);
 
         computerChoiceTextView = findViewById(R.id.computerChoiceTextView);
-        resultTextView = findViewById(R.id.resultTextViewID);
         rockButton = findViewById(R.id.rockButtonID);
         paperButton = findViewById(R.id.paperButtonID);
         scissorsButton = findViewById(R.id.scissorsButtonID);
-        scoreView = findViewById(R.id.scoreTextView);
+        scoreTextView = findViewById(R.id.scoreTextView);
 
         game = new Game();
         computer = new Computer();
@@ -40,23 +38,37 @@ public class RPSActivity extends AppCompatActivity {
     public void onRockButtonClicked(View button) {
         String computerGuess = computer.computerGuess();
         computerChoiceTextView.setText("Computer plays: " + computerGuess);
-        resultTextView.setText(game.decideWinner("rock", computerGuess));
-        scoreView.setText("You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore());
+        String result = game.decideWinner("rock", computerGuess);
+        String score = "You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore();
+        scoreTextView.setText(score);
+        Intent intent = new Intent(this, ShowResultActivity.class);
+        intent.putExtra("result", result);
+        intent.putExtra("score", score);
+        startActivity(intent);
     }
 
     public void onPaperButtonClicked(View button) {
         String computerGuess = computer.computerGuess();
         computerChoiceTextView.setText("Computer plays: " + computerGuess);
-        resultTextView.setText(game.decideWinner("paper", computerGuess));
-        scoreView.setText("You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore());
-
+        String result = game.decideWinner("paper", computerGuess);
+        String score = "You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore();
+        scoreTextView.setText(score);
+        Intent intent = new Intent(this, ShowResultActivity.class);
+        intent.putExtra("result", result);
+        intent.putExtra("score", score);
+        startActivity(intent);
     }
 
     public void onScissorsButtonClicked(View button) {
         String computerGuess = computer.computerGuess();
         computerChoiceTextView.setText("Computer plays: " + computerGuess);
-        resultTextView.setText(game.decideWinner("scissors", computerGuess));
-        scoreView.setText("You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore());
+        String result = game.decideWinner("scissors", computerGuess);
+        String score = "You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore();
+        scoreTextView.setText(score);
+        Intent intent = new Intent(this, ShowResultActivity.class);
+        intent.putExtra("result", result);
+        intent.putExtra("score", score);
+        startActivity(intent);
     }
 
 

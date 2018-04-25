@@ -4,4 +4,5 @@
     <string name="paper_button">PAPER</string>
     <string name="scissors_button">SCISSORS</string>
     <string name="rules">Choose one button (Rock, Paper or Scissors) and click on it. The Computer will make a random guess of Rock, Paper or Scissors. The results will then be compared, and the winner displayed below.</string>
+    <string name="show_activity_title">Game result</string>
 </resources>
