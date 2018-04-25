@@ -12,9 +12,6 @@ public class RPSActivity extends AppCompatActivity {
 
     private TextView computerChoiceTextView;
     private TextView scoreTextView;
-    private Button rockButton;
-    private Button paperButton;
-    private Button scissorsButton;
     private Game game;
     private Computer computer;
 
@@ -24,9 +21,6 @@ public class RPSActivity extends AppCompatActivity {
         setContentView(R.layout.activity_rps);
 
         computerChoiceTextView = findViewById(R.id.computerChoiceTextView);
-        rockButton = findViewById(R.id.rockButtonID);
-        paperButton = findViewById(R.id.paperButtonID);
-        scissorsButton = findViewById(R.id.scissorsButtonID);
         scoreTextView = findViewById(R.id.scoreTextView);
 
         game = new Game();
@@ -35,39 +29,44 @@ public class RPSActivity extends AppCompatActivity {
 
     }
 
-    public void onRockButtonClicked(View button) {
-        String computerGuess = computer.computerGuess();
-        computerChoiceTextView.setText("Computer plays: " + computerGuess);
-        String result = game.decideWinner("rock", computerGuess);
-        String score = "You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore();
-        scoreTextView.setText(score);
-        Intent intent = new Intent(this, ShowResultActivity.class);
-        intent.putExtra("result", result);
-        intent.putExtra("score", score);
-        startActivity(intent);
+    @Override
+    public void onSaveInstanceState(Bundle savedInstanceState){
+        savedInstanceState.putInt("playerScore", game.getPlayerScore());
+        savedInstanceState.putInt("computerScore", game.getComputerScore());
+
+        super.onSaveInstanceState(savedInstanceState);
     }
 
-    public void onPaperButtonClicked(View button) {
-        String computerGuess = computer.computerGuess();
-        computerChoiceTextView.setText("Computer plays: " + computerGuess);
-        String result = game.decideWinner("paper", computerGuess);
-        String score = "You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore();
-        scoreTextView.setText(score);
-        Intent intent = new Intent(this, ShowResultActivity.class);
-        intent.putExtra("result", result);
-        intent.putExtra("score", score);
-        startActivity(intent);
+    @Override
+    public void onResume(){
+        super.onResume();
+        scoreTextView.setText(game.showScore());
+
     }
 
-    public void onScissorsButtonClicked(View button) {
+    @Override
+    public void onPause(){
+        super.onPause();
+    }
+
+    @Override
+    public void onRestoreInstanceState(Bundle savedInstanceState) {
+         game.setPlayerScore(savedInstanceState.getInt("playerScore"));
+         game.setComputerScore(savedInstanceState.getInt("computerScore"));
+
+    }
+
+
+    public void onChoiceButtonClicked(View button) {
         String computerGuess = computer.computerGuess();
+        String playerGuess = ((Button) button).getText().toString();
+
         computerChoiceTextView.setText("Computer plays: " + computerGuess);
-        String result = game.decideWinner("scissors", computerGuess);
-        String score = "You: " + game.getPlayerScore() + " Computer: " + game.getComputerScore();
-        scoreTextView.setText(score);
+        String result = game.decideWinner(playerGuess, computerGuess);
+        scoreTextView.setText(game.showScore());
         Intent intent = new Intent(this, ShowResultActivity.class);
         intent.putExtra("result", result);
-        intent.putExtra("score", score);
+        intent.putExtra("score", game.showScore());
         startActivity(intent);
     }
 

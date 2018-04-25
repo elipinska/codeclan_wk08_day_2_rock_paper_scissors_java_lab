@@ -28,6 +28,14 @@ public class Game {
         return computerScore;
     }
 
+    public void setPlayerScore(int playerScore) {
+        this.playerScore = playerScore;
+    }
+
+    public void setComputerScore(int computerScore) {
+        this.computerScore = computerScore;
+    }
+
     public String decideWinner(String playerGuess, String computerGuess) {
         String result = "";
         if ((win.get(playerGuess)).equals(computerGuess)) {
@@ -41,6 +49,10 @@ public class Game {
         }
 
         return result;
+    }
+
+    public String showScore() {
+        return "You: " + getPlayerScore() + " Computer: " + getComputerScore();
     }
 
 
